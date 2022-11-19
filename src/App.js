@@ -1,5 +1,5 @@
-import Login from "./components/loginregister/Login";
-import Register from "./components/loginregister/Register";
+import Login from "./pages/loginregister/Login";
+import Register from "./pages/loginregister/Register";
 import Homepage from "./pages/Homepage";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
