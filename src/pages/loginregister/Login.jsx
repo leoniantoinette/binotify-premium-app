@@ -1,19 +1,28 @@
 import React from 'react'
 import loginImg from '../../assets/login.png'
-import { Link } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import {useState} from 'react'
 import Axios from 'axios'
+import {useNavigate } from 'react-router-dom'
 
 function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [loginStatus, setLoginStatus] = useState('')
+  const navigate = useNavigate()
+
   const login = () => {
-    Axios.post("http://localhost:3000/login",{
+    Axios.post("http://localhost:8080/login",{
       username: username,
       password: password
     }).then((response) => {
-      console.log(response);
+      if(response.data.message){
+        setLoginStatus(response.data.message)
+      }else{
+        navigate('/home');
+        window.location.reload();
+      }
     });
   }
   const {register, handleSubmit, formState: {errors}} = useForm()
@@ -56,6 +65,7 @@ function Login() {
                       <p className='flex items-center'>Don't Have an Account?</p> 
                       <p className='cursor-pointer'><Link to="/registers">Register Here</Link></p>
                   </div>
+                  <p className='flex justify-between text-red-500'>{loginStatus}</p>
               </form>
           </div>
           

@@ -1,6 +1,6 @@
 import React from 'react'
 import registerImg from '../../assets/register.jpg'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import Axios from 'axios'
 import {useState} from 'react'  
@@ -10,14 +10,14 @@ function Register() {
   const [email, setEmailReg] = useState('')
   const [name, setNameReg] = useState('')
 
+  const navigate = useNavigate()
   const registers=() =>{
-    Axios.post("http://localhost:3000/registers",{
+    Axios.post("http://localhost:8080/registers",{
       username: username,
       password: password,
       email: email,
       name: name,
-    })
-  }
+    })}
   const {register, getValues, handleSubmit, formState: {errors}} = useForm()
   const onSubmit = (data) => {
         console.log(data)
@@ -68,7 +68,8 @@ function Register() {
                       validate: (value) => {
                         const { password } = getValues();
                         return password === value || "Passwords should match!";
-                      }})}/>
+                      }})}
+                      />
                   </div>
                     {errors.confirmpassword && <p className='text-red-500'>Please Check Confirm Password</p>}
                   <button  onClick={registers} type="submit" id='submit' name="register"className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'>Register</button>
