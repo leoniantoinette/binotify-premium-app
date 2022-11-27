@@ -2,8 +2,8 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <aside className="w-72">
-      <div className="overflow-y-auto py-4 px-3 bg-gray-50  dark:bg-gray-800 h-full">
+    <aside className="w-72 fixed top-0 bottom-0 ">
+      <div className="overflow-y-auto py-4 px-3 bg-gray-50  dark:bg-gray-900 h-full">
         <h1 className="p-10 font-bold dark:text-white text-gray-700 text-3xl">
           Premium Binotify
         </h1>
