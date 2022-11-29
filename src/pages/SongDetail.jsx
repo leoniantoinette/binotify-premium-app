@@ -11,10 +11,20 @@ const SongDetail = () => {
     "http://localhost:8080/src/php/song/deletePremiumSong.php";
   const [songDetail, setSongDetail] = useState();
   const [songTitle, setSongTitle] = useState();
+  const [idUser, setId] = useState("");
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
   //TODO: get user_id from cookie
   useEffect(() => {
+    async function getSessionId() {
+      await axios.get("http://localhost:3001/login").then((response) => {
+        if (response.data.loggedIn === true) {
+          setId(response.data.user[0].user_id);
+        }
+      });
+    }
+
     async function getSongDetail() {
       await axios
         .get(`http://localhost:3001/user/10/songs/${songId}`)
@@ -25,6 +35,7 @@ const SongDetail = () => {
           console.log(error);
         });
     }
+    getSessionId();
     getSongDetail();
   }, [songId]);
 
@@ -54,13 +65,16 @@ const SongDetail = () => {
   };
 
   // handle audio file change to localhost:8080 php
-  // TODO: update audio_path in database
+
   const handleAudioFileChange = (e) => {
     const file = document.getElementById("audioFile").files[0];
+    const filename = document.getElementById("audioFile").files[0].name;
+    const userId = idUser;
+    let path_dir_audio = "assets/PremiumSong/" + userId + filename;
     const formData = new FormData();
     formData.append("audiofile", file);
     formData.append("song_id", songId);
-    formData.append("title", songTitle[0].Judul);
+    formData.append("user_id", userId);
     console.log("formData", formData);
     try {
       axios.post(API_PATH, formData, {
@@ -68,6 +82,27 @@ const SongDetail = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+    } catch (error) {
+      console.log(error);
+    }
+
+    // update audio_path in database
+    try {
+      axios
+        .put(
+          `http://localhost:3001/user/10/songs/audio/${songId}`,
+          {
+            audio_path: path_dir_audio,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          console.log("response", response);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -110,7 +145,7 @@ const SongDetail = () => {
     }
 
     // navigate to home
-    // navigate("/MySongs");
+    navigate("/MySongs");
   };
 
   return (

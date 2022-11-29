@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import likedLogo from "../assets/likedLogo.png";
 import { useState, useEffect } from "react";
 
@@ -11,14 +11,20 @@ const MySongs = () => {
   const [showModal, setShowModal] = React.useState(false);
   const PHP_PATH = "http://localhost:8080/src/php/song/editPremiumSong.php";
   const [idUser, setId] = useState("");
+  const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
-    axios.get("http://localhost:3001/login").then((response) => {
-      if (response.data.loggedIn === true) {
-        setId(response.data.user[0].user_id);
-      }
-    });
+    try {
+      axios.get("http://localhost:3001/login").then((response) => {
+        if (response.data.loggedIn === true) {
+          setId(response.data.user[0].user_id);
+          console.log("id", idUser);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   useEffect(() => {
@@ -46,10 +52,13 @@ const MySongs = () => {
     console.log("Clicked");
     const file = document.getElementById("audioFile").files[0];
     const filename = document.getElementById("audioFile").files[0].name;
+    const userId = idUser;
     console.log("filename =", filename);
+    console.log("userId =", userId);
     const formData = new FormData();
     formData.append("audiofile", file);
     formData.append("title", songTitle);
+    formData.append("user_id", userId);
     console.log("formData", formData);
     try {
       // upload file
@@ -64,7 +73,8 @@ const MySongs = () => {
         });
 
       // TODO: get song path from php
-      let path_dir_audio = "assets/PremiumSong/" + filename;
+      let path_dir_audio = "assets/PremiumSong/" + idUser + filename;
+      console.log("path_dir_audio", path_dir_audio);
 
       // insert to database
       axios
@@ -77,7 +87,8 @@ const MySongs = () => {
         });
 
       // refresh page
-      window.location.reload();
+      // window.location.reload();
+      navigate("/MySongs");
     } catch (error) {
       console.log(error);
     }
