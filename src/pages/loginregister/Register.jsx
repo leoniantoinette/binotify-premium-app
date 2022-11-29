@@ -4,6 +4,7 @@ import { Link,useNavigate } from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import Axios from 'axios'
 import {useState} from 'react'  
+Axios.defaults.withCredentials = true;
 function Register() {
   const [username, setUsernameReg] = useState('')
   const [password, setPasswordReg] = useState('')
@@ -13,7 +14,7 @@ function Register() {
 
   const navigate = useNavigate()
   const registers=() =>{
-    Axios.post("http://localhost:8080/registers",{
+    Axios.post("http://localhost:3000/registers",{
       username: username,
       password: password,
       email: email,

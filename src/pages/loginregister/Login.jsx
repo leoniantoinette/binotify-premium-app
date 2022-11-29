@@ -10,7 +10,7 @@ Axios.defaults.withCredentials = true;
 function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [loginStatus, setLoginStatus] = useState('')
+  const [loginStatus, setLoginStatus] = useState(false)
   const navigate = useNavigate()
 
   const login = () => {
@@ -18,9 +18,12 @@ function Login() {
       username: username,
       password: password
     }).then((response) => {
-      if(response.data.message){
-        setLoginStatus(response.data.message)
+      if(response.data.auth){
+        setLoginStatus(false)
       }else{
+        console.log(response.data);
+        localStorage.setItem('token', response.data.token)
+        setLoginStatus(true)
         navigate('/');
         window.location.reload();
       }
