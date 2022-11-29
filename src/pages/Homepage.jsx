@@ -8,7 +8,7 @@ export default function Homepage() {
 
   Axios.defaults.withCredentials = true;
   useEffect(() => {
-    Axios.get("http://localhost:3000/login").then((response) => {
+    Axios.get("http://localhost:3001/login").then((response) => {
       if (response.data.loggedIn === true) {
         setRole(response.data.user[0].isAdmin);
       }
@@ -19,7 +19,6 @@ export default function Homepage() {
     <div>
       {role === 0 && <MySongs />}
       {role === 1 && <MySongs />}
-
     </div>
   );
 }

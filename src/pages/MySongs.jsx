@@ -14,7 +14,7 @@ const MySongs = () => {
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
-    axios.get("http://localhost:3000/login").then((response) => {
+    axios.get("http://localhost:3001/login").then((response) => {
       if (response.data.loggedIn === true) {
         setId(response.data.user[0].user_id);
       }
