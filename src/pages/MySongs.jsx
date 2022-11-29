@@ -10,6 +10,16 @@ const MySongs = () => {
   const [songTitle, setSongTitle] = useState();
   const [showModal, setShowModal] = React.useState(false);
   const PHP_PATH = "http://localhost:8080/src/php/song/editPremiumSong.php";
+  const [idUser, setId] = useState("");
+
+  axios.defaults.withCredentials = true;
+  useEffect(() => {
+    axios.get("http://localhost:3000/login").then((response) => {
+      if (response.data.loggedIn === true) {
+        setId(response.data.user[0].user_id);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     async function fetchData() {

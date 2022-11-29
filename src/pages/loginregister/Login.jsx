@@ -10,20 +10,18 @@ Axios.defaults.withCredentials = true;
 function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [loginStatus, setLoginStatus] = useState(false)
+  const [loginStatus, setLoginStatus] = useState('')
   const navigate = useNavigate()
-
+  
   const login = () => {
     Axios.post("http://localhost:3000/login",{
       username: username,
-      password: password
+      password: password,
     }).then((response) => {
-      if(response.data.auth){
-        setLoginStatus(false)
+      if(response.data.message){
+        setLoginStatus(response.data.message)
       }else{
         console.log(response.data);
-        localStorage.setItem('token', response.data.token)
-        setLoginStatus(true)
         navigate('/');
         window.location.reload();
       }
@@ -31,17 +29,10 @@ function Login() {
   }
   const {register, handleSubmit, formState: {errors}} = useForm()
   const onSubmit = (data) => {
-        console.log(data)
+        console.log(data);
+
     };
   console.log(errors)
-
-  useEffect(() => {
-    Axios.get("http://localhost:3000/login").then((response) => {
-      if (response.data.loggedIn === true) {
-        setLoginStatus(response.data.user[0].username)
-      }
-    });
-  }, []);
 
   return (
     <div>
@@ -81,7 +72,6 @@ function Login() {
                   <p className='flex justify-between text-red-500'>{loginStatus}</p>
               </form>
           </div>
-          
       </div>
     </div>
   )
