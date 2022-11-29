@@ -9,6 +9,7 @@ function Register() {
   const [password, setPasswordReg] = useState('')
   const [email, setEmailReg] = useState('')
   const [name, setNameReg] = useState('')
+  const [regStatus, setRegStatus] = useState('')
 
   const navigate = useNavigate()
   const registers=() =>{
@@ -17,7 +18,15 @@ function Register() {
       password: password,
       email: email,
       name: name,
-    })}
+    }).then((response)=>{
+      if(response.data.message){
+        setRegStatus(response.data.message)
+      }else{
+        navigate('/home');
+        window.location.reload();
+      }
+    })
+  }
   const {register, getValues, handleSubmit, formState: {errors}} = useForm()
   const onSubmit = (data) => {
         console.log(data)
@@ -77,7 +86,9 @@ function Register() {
                       <p className='flex items-center'>Already Have an Account?</p> 
                       <p className='cursor-pointer'><Link to="/login">Login Here</Link></p>
                   </div>
+                  <p className='flex justify-between text-red-500'>{regStatus}</p>
               </form>
+              
           </div>
           <div className='hidden sm:block'>
               <img className='w-full h-full object-cover' src={registerImg} alt="" />
