@@ -22,7 +22,7 @@ function Register() {
       if(response.data.message){
         setRegStatus(response.data.message)
       }else{
-        navigate('/home');
+        navigate('/');
         window.location.reload();
       }
     })

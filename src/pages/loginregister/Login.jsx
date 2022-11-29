@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import loginImg from '../../assets/login.png'
 import { Link} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
@@ -6,6 +6,7 @@ import {useState} from 'react'
 import Axios from 'axios'
 import {useNavigate } from 'react-router-dom'
 
+Axios.defaults.withCredentials = true;
 function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -13,14 +14,14 @@ function Login() {
   const navigate = useNavigate()
 
   const login = () => {
-    Axios.post("http://localhost:8080/login",{
+    Axios.post("http://localhost:3000/login",{
       username: username,
       password: password
     }).then((response) => {
       if(response.data.message){
         setLoginStatus(response.data.message)
       }else{
-        navigate('/home');
+        navigate('/');
         window.location.reload();
       }
     });
@@ -30,6 +31,15 @@ function Login() {
         console.log(data)
     };
   console.log(errors)
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/login").then((response) => {
+      if (response.data.loggedIn === true) {
+        setLoginStatus(response.data.user[0].username)
+      }
+    });
+  }, []);
+
   return (
     <div>
         
