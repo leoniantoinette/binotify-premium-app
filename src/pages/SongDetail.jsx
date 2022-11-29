@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import likedLogo from "../assets/likedLogo.png";
@@ -9,6 +9,7 @@ const SongDetail = () => {
   const API_PATH = "http://localhost:8080/src/php/song/editPremiumSong.php";
   const [songDetail, setSongDetail] = useState();
   const [songTitle, setSongTitle] = useState();
+  const navigate = useNavigate();
 
   //TODO: get user_id from cookie
   useEffect(() => {
@@ -69,6 +70,20 @@ const SongDetail = () => {
     }
   };
 
+  // handle delete song
+  // TODO: get user_id from session
+  const handleDeleteSong = (e) => {
+    e.preventDefault();
+    try {
+      axios.delete(`http://localhost:3001/user/10/songs/${songId}`);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // navigate to home
+    navigate("/MySongs");
+  };
+
   return (
     <div className="h-screen">
       <Navbar />
@@ -85,6 +100,15 @@ const SongDetail = () => {
                   {songDetail[0].Judul}
                 </h1>
               )}
+
+              <button
+                class="focus:ring-2 focus:ring-offset-2 focus:ring-red-600 inline-flex mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-red-700 hover:bg-red-600 focus:outline-none rounded"
+                onClick={handleDeleteSong}
+              >
+                <p class="text-sm font-medium leading-none text-white">
+                  Delete Song
+                </p>
+              </button>
             </div>
           </div>
         </div>
