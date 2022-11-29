@@ -7,6 +7,8 @@ import likedLogo from "../assets/likedLogo.png";
 const SongDetail = () => {
   const { songId } = useParams();
   const API_PATH = "http://localhost:8080/src/php/song/editPremiumSong.php";
+  const DELETE_PATH =
+    "http://localhost:8080/src/php/song/deletePremiumSong.php";
   const [songDetail, setSongDetail] = useState();
   const [songTitle, setSongTitle] = useState();
   const navigate = useNavigate();
@@ -52,6 +54,7 @@ const SongDetail = () => {
   };
 
   // handle audio file change to localhost:8080 php
+  // TODO: update audio_path in database
   const handleAudioFileChange = (e) => {
     const file = document.getElementById("audioFile").files[0];
     const formData = new FormData();
@@ -74,14 +77,40 @@ const SongDetail = () => {
   // TODO: get user_id from session
   const handleDeleteSong = (e) => {
     e.preventDefault();
+    // get song filename from audio path
+    const path_dir_audio = "assets/PremiumSong/";
+    const audio_path = songDetail[0].Audio_path;
+    console.log("audio_path", audio_path);
+    let filename = audio_path.replace(path_dir_audio, "");
+    console.log(filename);
+
     try {
+      // delete song from database
       axios.delete(`http://localhost:3001/user/10/songs/${songId}`);
+      // delete file from localhost:8080 php
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("filename", filename);
+
+      axios
+        .post(DELETE_PATH, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        });
     } catch (error) {
       console.log(error);
     }
 
     // navigate to home
-    navigate("/MySongs");
+    // navigate("/MySongs");
   };
 
   return (
@@ -103,7 +132,7 @@ const SongDetail = () => {
 
               <button
                 class="focus:ring-2 focus:ring-offset-2 focus:ring-red-600 inline-flex mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-red-700 hover:bg-red-600 focus:outline-none rounded"
-                onClick={handleDeleteSong}
+                onClick={(e) => handleDeleteSong(e)}
               >
                 <p class="text-sm font-medium leading-none text-white">
                   Delete Song

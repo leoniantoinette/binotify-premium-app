@@ -45,6 +45,8 @@ const MySongs = () => {
     e.preventDefault();
     console.log("Clicked");
     const file = document.getElementById("audioFile").files[0];
+    const filename = document.getElementById("audioFile").files[0].name;
+    console.log("filename =", filename);
     const formData = new FormData();
     formData.append("audiofile", file);
     formData.append("title", songTitle);
@@ -62,7 +64,7 @@ const MySongs = () => {
         });
 
       // TODO: get song path from php
-      let path_dir_audio = "assets/PremiumSong/" + songTitle + ".mp3";
+      let path_dir_audio = "assets/PremiumSong/" + filename;
 
       // insert to database
       axios
