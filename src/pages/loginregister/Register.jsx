@@ -24,7 +24,7 @@ function Register() {
         setRegStatus(response.data.message);
       } else {
         console.log(response.data);
-        navigate("/MySongs");
+        navigate("/");
         window.location.reload();
       }
     });
