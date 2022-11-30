@@ -15,30 +15,24 @@ const MySongs = () => {
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
-    try {
-      axios.get("http://localhost:3001/login").then((response) => {
+    async function fetchSongs() {
+      await axios.get("http://localhost:3001/login").then((response) => {
         if (response.data.loggedIn === true) {
           setId(response.data.user[0].user_id);
-          console.log("id", idUser);
+          console.log(response.data.user[0].user_id);
+          axios
+            .get(
+              `http://localhost:3001/user/${response.data.user[0].user_id}/songs`
+            )
+            .then((response) => {
+              setSongs(response.data);
+            });
         }
       });
-    } catch (error) {
-      console.log(error);
     }
-  }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      await axios
-        .get("http://localhost:3001/user/10/songs")
-        .then((response) => {
-          setSongs(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    fetchData();
+    // get userId first then fetch songs
+    fetchSongs();
   }, []);
 
   const handleSongTitleChange = (e) => {
@@ -78,7 +72,7 @@ const MySongs = () => {
 
       // insert to database
       axios
-        .post("http://localhost:3001/user/10/songs", {
+        .post(`http://localhost:3001/user/${idUser}/songs`, {
           title: songTitle,
           audio_path: path_dir_audio,
         })
