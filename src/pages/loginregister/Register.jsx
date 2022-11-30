@@ -23,7 +23,7 @@ function Register() {
       if (response.data.message) {
         setRegStatus(response.data.message);
       } else {
-        navigate("/");
+        navigate("/MySongs");
         window.location.reload();
       }
     });
@@ -134,6 +134,9 @@ function Register() {
                     return password === value || "Passwords should match!";
                   },
                 })}
+               
+              
+      
               />
             </div>
             {errors.confirmpassword && (

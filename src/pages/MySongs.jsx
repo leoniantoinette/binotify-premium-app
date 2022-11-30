@@ -180,6 +180,7 @@ const MySongs = () => {
               <p className="text-sm font-light tracking-widest text-white">
                 PLAYLIST
               </p>
+              
               <h1 className="text-white font-bold text-7xl">My Songs</h1>
             </div>
           </div>
