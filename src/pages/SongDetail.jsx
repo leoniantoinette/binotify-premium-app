@@ -17,26 +17,22 @@ const SongDetail = () => {
 
   //TODO: get user_id from cookie
   useEffect(() => {
-    async function getSessionId() {
+    async function fetchSongDetail() {
       await axios.get("http://localhost:3001/login").then((response) => {
         if (response.data.loggedIn === true) {
           setId(response.data.user[0].user_id);
+          axios
+            .get(
+              `http://localhost:3001/user/${response.data.user[0].user_id}/songs/${songId}`
+            )
+            .then((response) => {
+              setSongDetail(response.data);
+            });
         }
       });
     }
 
-    async function getSongDetail() {
-      await axios
-        .get(`http://localhost:3001/user/10/songs/${songId}`)
-        .then((response) => {
-          setSongDetail(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    getSessionId();
-    getSongDetail();
+    fetchSongDetail();
   }, [songId]);
 
   const handleSongTitleChange = (e) => {
@@ -49,7 +45,7 @@ const SongDetail = () => {
     console.log("Clicked", songTitle);
     try {
       axios.put(
-        `http://localhost:3001/user/10/songs/title/${songId}`,
+        `http://localhost:3001/user/${idUser}/songs/title/${songId}`,
         {
           title: songTitle,
         },
@@ -90,7 +86,7 @@ const SongDetail = () => {
     try {
       axios
         .put(
-          `http://localhost:3001/user/10/songs/audio/${songId}`,
+          `http://localhost:3001/user/${idUser}/songs/audio/${songId}`,
           {
             audio_path: path_dir_audio,
           },
@@ -121,7 +117,7 @@ const SongDetail = () => {
 
     try {
       // delete song from database
-      axios.delete(`http://localhost:3001/user/10/songs/${songId}`);
+      axios.delete(`http://localhost:3001/user/${idUser}/songs/${songId}`);
       // delete file from localhost:8080 php
     } catch (error) {
       console.log(error);
