@@ -23,6 +23,7 @@ function Register() {
       if (response.data.message) {
         setRegStatus(response.data.message);
       } else {
+        console.log(response.data);
         navigate("/MySongs");
         window.location.reload();
       }
