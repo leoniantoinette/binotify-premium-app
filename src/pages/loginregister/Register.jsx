@@ -10,6 +10,7 @@ function Register() {
   const [password, setPasswordReg] = useState("");
   const [email, setEmailReg] = useState("");
   const [name, setNameReg] = useState("");
+  const [confirm, setConfirm] = useState("");
   const [regStatus, setRegStatus] = useState("");
 
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ function Register() {
       password: password,
       email: email,
       name: name,
+      confirm: confirm,
     }).then((response) => {
       if (response.data.message) {
         setRegStatus(response.data.message);
@@ -135,8 +137,10 @@ function Register() {
                     return password === value || "Passwords should match!";
                   },
                 })}
-               
-              
+                
+                onChange={(e) => {
+                  setConfirm(e.target.value);
+                }}
       
               />
             </div>
