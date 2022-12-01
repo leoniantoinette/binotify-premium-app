@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-
+import SubscriptionReq from "./SubscriptionReq";
 import MySongs from "./MySongs";
 
 export default function Homepage() {
@@ -18,7 +18,7 @@ export default function Homepage() {
   return (
     <div>
       {role === 0 && <MySongs />}
-      {role === 1 && <MySongs />}
+      {role === 1 && <SubscriptionReq/>}
     </div>
   );
 }
