@@ -139,7 +139,7 @@ function Register() {
                 })}
                 
                 onChange={(e) => {
-                  setConfirm(e.target.value);
+                  setConfirm(e.target.value ===password);
                 }}
       
               />
