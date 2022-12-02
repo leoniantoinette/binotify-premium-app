@@ -11,7 +11,8 @@ class SubscriptionReq extends Component {
       currentPage: 1,
       listSubscription: [],
       loading: null,
-      postsPerPage: 10
+      postsPerPage: 10,
+      role: 1,
     };
     
   }
@@ -22,6 +23,11 @@ class SubscriptionReq extends Component {
     axios.get("http://localhost:3001/api/list-subscription").then((response) => {
       this.setState({ listSubscription: response.data });
       this.setState({ loading: false });
+    });
+    axios.get("http://localhost:3001/login").then((response) => {
+      if (response.data.loggedIn === true) {
+        this.setState({ role: response.data.user[0].isAdmin});
+      }
     });
   }
 
@@ -36,6 +42,7 @@ class SubscriptionReq extends Component {
     const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
     const indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
     const currentPosts = this.state.listSubscription.slice(indexOfFirstPost, indexOfLastPost);
+    const role = this.state.role;
 
     const pageNumbers = []
     for (let i = 1; i <= Math.ceil(this.state.listSubscription.length / this.state.postsPerPage); i++) {
@@ -78,6 +85,7 @@ class SubscriptionReq extends Component {
     }
     
     return (
+      role === 1 &&
       <div className="min-h-screen">
         <Navbar />
         <div className="pl-72 w-full h-full flex flex-col bg-gray-900">

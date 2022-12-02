@@ -12,6 +12,7 @@ const MySongs = () => {
   const PHP_PATH = "http://localhost:8080/src/php/song/editPremiumSong.php";
   const [idUser, setId] = useState("");
   const [usern,setUser] = useState("");
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("user");
@@ -26,6 +27,7 @@ const MySongs = () => {
         if (response.data.loggedIn === true) {
           setId(response.data.user[0].user_id);
           setUser(response.data.user[0].username);
+          setRole(response.data.user[0].isAdmin);
           console.log(response.data.user[0].user_id);
           axios
             .get(
@@ -96,6 +98,7 @@ const MySongs = () => {
   };
 
   return (
+    role === 0 && 
     <div className="min-h-screen">
       <Navbar />
       <div className="pl-72 w-full h-full flex flex-col bg-gray-900">
