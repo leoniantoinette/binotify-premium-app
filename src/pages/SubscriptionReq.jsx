@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
-import { Navigate, useNavigate } from "react-router-dom";
 
 
 class SubscriptionReq extends Component {
