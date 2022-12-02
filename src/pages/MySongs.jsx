@@ -11,10 +11,11 @@ const MySongs = () => {
   const [showModal, setShowModal] = React.useState(false);
   const PHP_PATH = "http://localhost:8080/src/php/song/editPremiumSong.php";
   const [idUser, setId] = useState("");
-  const [user,setUser] = useState("");
+  const [usern,setUser] = useState("");
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.clear();
     navigate("/login");
     window.location.reload();
   };
@@ -175,7 +176,7 @@ const MySongs = () => {
 
         <div className="h-2/5 text-4xl font-bold p-4 bg-gradient-to-b from-violet-500 to-gray-900 ">
         <button onClick={logout} className='fa-fa-user float-right focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 my-2 mx-4'>logout</button>
-          <button className='float-right focus:outline-none text-white bg-red-700 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 my-2 mx-4 cursor-default'>{user}</button>
+          <button className='float-right focus:outline-none text-white bg-red-700 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 my-2 mx-4 cursor-default'>{usern}</button>
           <div className="flex flex-row gap-5 pt-4 pl-4 ">
             <img src={likedLogo} className="w-1/5" alt="" />
             <div className="pt-8">

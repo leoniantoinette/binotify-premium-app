@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 class SubscriptionReq extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +14,7 @@ class SubscriptionReq extends Component {
       loading: null,
       postsPerPage: 10
     };
+    
   }
 
   // fetch data
@@ -23,6 +27,12 @@ class SubscriptionReq extends Component {
   }
 
   render() {
+    const logout = () => {
+      localStorage.removeItem("user");
+      localStorage.clear();
+      window.location.reload();
+      window.location.href = "http://localhost:3000/login";
+    };
     // get current posts
     const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
     const indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
@@ -67,12 +77,13 @@ class SubscriptionReq extends Component {
         }
       });
     }
-
+    
     return (
       <div className="min-h-screen">
         <Navbar />
         <div className="pl-72 w-full h-full flex flex-col bg-gray-900">
           <div className="bg-gradient-to-b from-violet-500 to-gray-900">
+          <button onClick={logout} className='fa-fa-user float-right focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 my-2 mx-4'>logout</button>
             <h1 className="text-5xl text-white font-bold text-center pt-12 pb-8">Subscription Request</h1>
           </div>
           <div className="w-full flex flex-col min-h-screen sm:px-4 items-center">
