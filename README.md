@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# IF3110 Pengembangan Aplikasi Berbasis Web
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> _This is a project done to fulfil one of IF3110's course assignment._
 
-## Available Scripts
+## Description
+   Aplikasi ini merupakan aplikasi berbasis web yang memiliki fungsionalitas utama seperti platform musik terkenal **SPOTIFY**. Aplikasi ini dibuat dengan menggunakan beberapa bahasa pemograman dan library. Bahasa dan Tools yang digunakan di antaranya JavaScript, React Js, Tailwind untuk  client side, Node Js untuk server side, dan MYSQL untuk penyimpanan database.
+   Halaman yang terdapat pada aplikasi ini adalah sebagai berikut:
+   * Login
+   * Register
+   * Homepage
+   * Pengelolaan lagu
+   * List Permintaan Subscription
 
-In the project directory, you can run:
+## Requirements
+Untuk menjalankan program pastikan Anda telah mendownload dan menginstall hal-hal berikut:
+1. Teks Editor
+2. JavaScript
+3. XAMPP
+4. MySQL
 
-### `npm start`
+## How To Install
+1. Teks Editor yang kami sarankan adalah Visual Studio Code yang panduan download dan installnya dapat dilihat pada tautan berikut ini [vscode](https://www.belajarisme.com/tutorial/install-vscode/#:~:text=Sekarang%20mari%20kita%20install%20VSCode%20dengan%20cara%20berikut,Select%20Star%20Menu%20Folder%20klik%20Next.%20More%20items)
+2. Panduan instalasi JavaScript dapat dilihat pada tautan berikut [JS](https://www.duniailkom.com/javascript-uncover-panduan-belajar-javascript-untuk-pemula/)
+3. Panduan instalasi XAMPP dapat dilihat pada tautan berikut [XAMPP](https://webhostmu.com/cara-install-xampp/#:~:text=Cara%20Install%20XAMPP%20di%20Windows%201%201%29%20Download,8%29%20Tunggu%20proses%20instalasi%20selesai%20...%20More%20items)
+4. Panduan instalasi MySQL dapat dilihat pada tautan berikut [MySQL](https://www.duniailkom.com/tutorial-mysql-download-install-dan-setingan-awal-mysql/)
+## How To Run
+Buka folder htdocs yang berada di dalam folder XAMPP, lalu clone repository ini. Selanjutnya pada terminal jalankan command "npm start"
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Screenshot
+1. Halaman Login <img src="src/assets/readme/login.png" />
+2. Halaman Register <img src="src/assets/readme/register.png" />
+3. Halaman Homepage<img src="src/assets/readme/homepage.jpg" />
+4. Halaman Pengelolaan Lagu <img src=""/>
+5. Halaman List Permintaan Subscription <img src=""/>
+## Authors
+<table>
+  <tr >
+      <td><b>Frontend Halaman MySongs</b></td>
+      <td><b>Frontend Halaman List Permintaan Subscription</b></td>
+      <td><b>Frontend Halaman Login Register</b></td>
+    </tr>
+    <tr >
+      <td><a href="https://gitlab.informatika.org/Aloysiusgilang"><b>13520147 - Aloysius Gilang Pramudya</b></a></td> 
+        <td><a href="https://gitlab.informatika.org/leoniantoinette"><b>13520051 - Flavia Beatrix Leoni Antoinette Santoso</b></a></td>
+        <td><a href="https://gitlab.informatika.org/febryola"><b>13520140 - Febryola Kurnia Putri</b></a></td>
+   </tr>
+</table>
